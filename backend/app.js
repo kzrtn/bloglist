@@ -24,7 +24,6 @@ mongoose
     logger.error('Failed to connect to database',)
   )
 
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'dist', 'index.html')))
 //app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 app.use('/api/blogs', blogsRouter)

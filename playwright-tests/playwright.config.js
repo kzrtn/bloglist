@@ -73,16 +73,16 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
     webServer: [{
-      command: 'npm run test',
+      command: 'npm run test:dev',
       cwd: '../backend',
-      url: 'http://localhost:3003',
-      reuseExistingServer: !process.env.CI,
+      port: 3003,
+      reuseExistingServer: true,
     },
     {
       command: 'npm run dev',
       cwd: '../frontend',
-      url: 'http://localhost:5173',
-      reuseExistingServer: !process.env.CI,
+      port: 5173,
+      reuseExistingServer: true,
     }],
 });
 

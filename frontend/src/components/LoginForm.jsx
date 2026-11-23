@@ -27,6 +27,7 @@ const LoginForm = ({ loginService }) => {
           <label>
             <TextField
               variant="standard"
+              label="username"
               value={username}
               onChange ={({ target }) => setUsername(target.value)}
               placeholder="username"
@@ -38,6 +39,7 @@ const LoginForm = ({ loginService }) => {
           <TextField
             variant="standard"
             value={password}
+            label="password"
             type="password"
             onChange ={({ target }) => setPassword(target.value)}
             placeholder="password"

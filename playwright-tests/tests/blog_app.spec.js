@@ -19,6 +19,7 @@ describe('Blog app', () => {
 
   test('login form is visible', async ({ page }) => {
     await page.getByRole('link', { name: 'login' }).click()
+    await expect(page).toHaveURL(/\/login/)
     await expect(page.getByLabel('username')).toBeVisible()
     await expect(page.getByLabel('password')).toBeVisible()
     await expect(page.getByRole('button', { name: 'Log in' })).toBeVisible()
@@ -52,7 +53,7 @@ describe('Blog app', () => {
         test('post can be liked', async ({ page }) => {
           await page.getByRole('link', { name: 'test' }).click()
           await page.getByRole('button', { name: 'like' }).click()
-          await expect(page.getByText('likes 1')).toBeVisible()
+          await expect(page.getByText('1 likes')).toBeVisible()
         })
 
         test('blogs are sorted according to likes', async ({ page }) => {

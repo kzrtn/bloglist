@@ -34,6 +34,7 @@ const BlogForm = ({ blogService }) => {
           <label>
             <TextField
               value={blogFields.title}
+              label="title"
               onChange={({ target }) => setBlogFields({ ...blogFields, title: target.value })}
               placeholder="title"
               sx={style}
@@ -45,6 +46,7 @@ const BlogForm = ({ blogService }) => {
           <label>
             <TextField
               value={blogFields.author}
+              label="author"
               onChange={({ target }) => setBlogFields({ ...blogFields, author: target.value })}
               placeholder="author"
               sx={style}
@@ -56,6 +58,7 @@ const BlogForm = ({ blogService }) => {
           <label>
             <TextField
               value={blogFields.url}
+              label="url"
               onChange={({ target }) => setBlogFields({ ...blogFields, url: target.value })}
               placeholder="url"
               sx={style}

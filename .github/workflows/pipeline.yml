@@ -17,9 +17,9 @@ jobs:
       with:
         node-version: lts/*
     - name: Install dependencies
-      run: npm ci
+      run: cd frontend && npm install
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: cd playwright-tests && npx playwright install --with-deps
     - name: Run Playwright tests
       run: cd playwright-tests && npm run test:playwright
     - uses: actions/upload-artifact@v5
@@ -39,13 +39,13 @@ jobs:
       with:
         node-version: '24'
     - name: Install dependencies
-      run: npm install
+      run: cd backend && npm install
 ##    - name: Check style
 ##      run: npm run eslint
 ##    - name: Build
 ##      run: npm run build
     - name: Run vitest tests
-      run: npm run test
+      run: cd backend && npm run test
 ##    - name: Trigger deployment
 ##      if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
 ##      run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}"

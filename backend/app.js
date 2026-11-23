@@ -11,7 +11,7 @@ const loginRouter = require('./controllers/login.js')
 const app = express()
 
 app.use(express.json())
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static('dist'))
 
 const mongoUrl = config.MONGODB_URI 
 logger.info('Connecting to MongoDB url...', mongoUrl)

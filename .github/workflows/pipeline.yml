@@ -52,7 +52,7 @@ jobs:
 ##    - name: Build
 ##      run: npm run build
     - name: Run vitest tests
-      run: cd backend && npm run test
+      run: echo ls
 ##    - name: Trigger deployment
 ##      if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
 ##      run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}"

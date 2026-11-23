@@ -36,6 +36,7 @@ jobs:
         retention-days: 30
 
   vitest_tests_and_deploy:
+    needs: [playwright_tests]
     runs-on: ubuntu-latest
     env:
       COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ' ') }}

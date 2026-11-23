@@ -11,6 +11,7 @@ const loginRouter = require('./controllers/login.js')
 const app = express()
 
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'dist')))
 
 const mongoUrl = config.MONGODB_URI 
 logger.info('Connecting to MongoDB url...', mongoUrl)
@@ -23,6 +24,7 @@ mongoose
     logger.error('Failed to connect to database',)
   )
 
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'dist', 'index.html')))
 //app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 app.use('/api/blogs', blogsRouter)

@@ -16,8 +16,10 @@ jobs:
     - uses: actions/setup-node@v6
       with:
         node-version: lts/*
-    - name: Install dependencies
+    - name: Install frontend dependencies
       run: cd frontend && npm install
+    - name: Install backend dependencies
+      run: cd backend && npm install
     - name: Install Playwright Browsers
       run: cd playwright-tests && npm install && npx playwright install
     - name: Run Playwright tests
@@ -38,7 +40,7 @@ jobs:
     - uses: actions/setup-node@v6
       with:
         node-version: '24'
-    - name: Install dependencies
+    - name: Install backend dependencies
       run: cd backend && npm install
 ##    - name: Check style
 ##      run: npm run eslint

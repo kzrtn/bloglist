@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: cd frontend && npm install
     - name: Install Playwright Browsers
-      run: cd playwright-tests && npx playwright install --with-deps
+      run: cd playwright-tests && npm install
     - name: Run Playwright tests
       run: cd playwright-tests && npm run test
     - uses: actions/upload-artifact@v5

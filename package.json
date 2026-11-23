@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "install": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "install": "cd backend && npm install && cd ../frontend && npm install",
     "start": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
     "test": "cd backend && npm test",
     "test:playwright": "cd playwright-tests && npm run test"

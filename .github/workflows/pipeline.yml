@@ -26,7 +26,7 @@ jobs:
     - name: Install backend dependencies
       run: cd backend && npm install
     - name: Install Playwright Browsers
-      run: cd playwright-tests && npm install && npx playwright install
+      run: cd playwright-tests && npm install && npx playwright install --with-deps
     - name: Run Playwright tests
       run: cd playwright-tests && npm run test
     - uses: actions/upload-artifact@v5

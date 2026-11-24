@@ -23,9 +23,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === 'MongoServerError' && err.message.includes('E11000 duplicate key error')) {
     return res.status(400).json({ error: `Username already taken: ${err.message}` })
   } else if (err.name === 'CastError') {
-    return res.status(400).json({ error: `Malformatted id: ${err.message}`})
+    return res.status(400).json({ error: `Malformatted id: ${err.message}` })
   } else if (err.name === 'JsonWebTokenError') {
-    return res.status(401).json({ error: `JWT token missing/invalid: ${err.message}`})
+    return res.status(401).json({ error: `JWT token missing/invalid: ${err.message}` })
   }
 
   next(err)
@@ -39,7 +39,7 @@ const tokenExtractor = (req, res, next) => {
   } else {
     req.token = null
   }
-  
+
   next()
 }
 
@@ -51,7 +51,7 @@ const userExtractor = async (req, res, next) => {
 
   const user = await User.findById(token.id)
   if (!user) {
-    return res.status(400).json({ error: 'user ID is missing or not valid'})
+    return res.status(400).json({ error: 'user ID is missing or not valid' })
   }
 
   req.user = user

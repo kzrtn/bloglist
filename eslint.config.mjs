@@ -4,7 +4,8 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['**/dist/**'] },
+  js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -38,5 +39,23 @@ export default [
       'arrow-spacing': ['error', { before: true, after: true }],
       'no-console': 'off'
     }
-  }
+  },
+  {
+    files: ['**/playwright.config.js', 'playwright-tests/tests/*.{js,jsx}', 'backend/**/*.{js,jsx}'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
+    files: ['playwright-tests/*.spec.{js,jsx}', 'backend/tests/*.{js,jsx}'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
 ]

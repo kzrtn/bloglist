@@ -46,6 +46,7 @@ const App = () => {
     if (loggedUserJSON) {
       const userObj = JSON.parse(loggedUserJSON)
       blogService.setToken(userObj.token)
+      // eslint-disable-next-line
       setUser(userObj)
     }
   }, [])

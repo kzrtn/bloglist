@@ -1,14 +1,7 @@
 const { after, beforeEach, describe, test } = require('node:test')
 const assert = require('node:assert')
-const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
-const supertest = require('supertest')
-
-const app = require('../app.js')
-const User = require('../models/user.js')
-const { createSampleUsers, createSampleBlogs, usersInDb, blogsInDb, sendUser } = require('./test_helper.js')
-
-const api = supertest(app)
+const { createSampleBlogs, usersInDb, sendUser } = require('./test_helper.js')
 
 beforeEach(async () => {
   await createSampleBlogs()
@@ -24,7 +17,6 @@ describe('creating user with', () => {
     const dbAtStart = await usersInDb()
     await sendUser(testUser).expect(200)
     const dbAtEnd = await usersInDb()
-    const blogs = await blogsInDb()
 
     assert.strictEqual(dbAtEnd.length, dbAtStart.length + 1)
   })

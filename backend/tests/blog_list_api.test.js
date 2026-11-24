@@ -1,13 +1,10 @@
 const assert = require('node:assert')
 const { describe, test, beforeEach, after } = require('node:test')
 
-const Blog = require('../models/blog.js')
-const User = require('../models/user.js')
 const app = require('../app.js')
 const { createSampleBlogs, blogsInDb, createTestUser } = require('./test_helper.js')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
-const { read } = require('node:fs')
 
 const api = supertest(app)
 
@@ -57,10 +54,10 @@ describe('making blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      id: "123456789",
-      title: "This is a new blog post",
-      author: "Test author",
-      url: "https://www.google.com/",
+      id: '123456789',
+      title: 'This is a new blog post',
+      author: 'Test author',
+      url: 'https://www.google.com/',
       likes: 0,
       user: user.id
     }
@@ -83,9 +80,9 @@ describe('making blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      title: "test post",
-      author: "Test author",
-      url: "https://www.google.com/",
+      title: 'test post',
+      author: 'Test author',
+      url: 'https://www.google.com/',
       user: user._id
     }
 
@@ -100,7 +97,7 @@ describe('making blog posts', () => {
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
-    const returnedBlog = res.body.find(blog => blog.title == 'test post')
+    const returnedBlog = res.body.find(blog => blog.title === 'test post')
     assert.strictEqual(returnedBlog.likes, 0)
   })
 
@@ -108,8 +105,8 @@ describe('making blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      author: "wow",
-      url: "https://www.kfc.com",
+      author: 'wow',
+      url: 'https://www.kfc.com',
       likes: 1,
       user: user._id
     }
@@ -125,8 +122,8 @@ describe('making blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      title: "my title",
-      author: "wow",
+      title: 'my title',
+      author: 'wow',
       likes: 10,
       user: user._id
     }
@@ -159,10 +156,10 @@ describe('making blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      id: "123456789",
-      title: "This is a new blog post",
-      author: "Test author",
-      url: "https://www.google.com/",
+      id: '123456789',
+      title: 'This is a new blog post',
+      author: 'Test author',
+      url: 'https://www.google.com/',
       likes: 0,
       user: user.id
     }
@@ -184,13 +181,13 @@ describe('making blog posts', () => {
 
 describe('deleting blog posts', () => {
   test('response status 204 for successful single deletion', async () => {
-    const dbAtStart = await blogsInDb()
+    // const dbAtStart = await blogsInDb()
     const user = await createTestUser()
 
     const newBlog = {
-      title: "This is a new blog post",
-      author: "Test author",
-      url: "https://www.google.com/",
+      title: 'This is a new blog post',
+      author: 'Test author',
+      url: 'https://www.google.com/',
       likes: 0,
       user: user.id
     }
@@ -205,8 +202,8 @@ describe('deleting blog posts', () => {
       .delete(`/api/blogs/${returnedBlog.body.id}`)
       .set('Authorization', `Bearer ${user.token}`)
       .expect(204)
-    
-    const res = await api
+
+    await api
       .get('/api/blogs')
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -217,9 +214,9 @@ describe('deleting blog posts', () => {
     const user = await createTestUser()
 
     const deleteBlog = {
-      id: "5a422a851b54a676234d1123",
+      id: '5a422a851b54a676234d1123',
     }
-    
+
     await api
       .delete(`/api/blogs/${deleteBlog.id}`)
       .set('Authorization', `Bearer ${user.token}`)
@@ -260,9 +257,9 @@ describe('updating blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      title: "This is a new blog post",
-      author: "Test author",
-      url: "https://www.google.com/",
+      title: 'This is a new blog post',
+      author: 'Test author',
+      url: 'https://www.google.com/',
       likes: 0,
       user: user.id
     }
@@ -272,7 +269,7 @@ describe('updating blog posts', () => {
       .send(newBlog)
       .set('Authorization', `Bearer ${user.token}`)
       .expect(201)
-    
+
     const updatedBlog = {
       likes: 1,
       id: returnedBlog.body.id
@@ -307,9 +304,9 @@ describe('updating blog posts', () => {
     const user = await createTestUser()
 
     const newBlog = {
-      title: "This is a new blog post",
-      author: "Test author",
-      url: "https://www.google.com/",
+      title: 'This is a new blog post',
+      author: 'Test author',
+      url: 'https://www.google.com/',
       likes: 0,
       user: user.id
     }
@@ -319,10 +316,10 @@ describe('updating blog posts', () => {
       .send(newBlog)
       .set('Authorization', `Bearer ${user.token}`)
       .expect(201)
-    
+
     const updatedBlog = {
       likes: 1,
-      id: `6a844820d8b3366378b46123`
+      id: '6a844820d8b3366378b46123'
     }
 
     const expectedPost = {
@@ -354,7 +351,7 @@ describe('updating blog posts', () => {
     const user = await createTestUser()
 
     await api
-      .put(`/api/blogs/`)
+      .put('/api/blogs/')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${user.token}`)
       .send({})

@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Read environment variables from file.
@@ -72,17 +72,17 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-    webServer: [{
-      command: 'npm run test:dev',
-      cwd: '../backend',
-      port: 3003,
-      reuseExistingServer: true,
-    },
-    {
-      command: 'npm run dev',
-      cwd: '../frontend',
-      port: 5173,
-      reuseExistingServer: true,
-    }],
-});
+  webServer: [{
+    command: 'npm run test:dev',
+    cwd: '../backend',
+    port: 3003,
+    reuseExistingServer: true,
+  },
+  {
+    command: 'npm run dev',
+    cwd: '../frontend',
+    port: 5173,
+    reuseExistingServer: true,
+  }],
+})
 

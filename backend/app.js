@@ -13,7 +13,7 @@ const app = express()
 app.use(express.json())
 app.use(express.static('dist'))
 
-const mongoUrl = config.MONGODB_URI 
+const mongoUrl = config.MONGODB_URI
 logger.info('Connecting to MongoDB url...', mongoUrl)
 
 mongoose
@@ -21,7 +21,7 @@ mongoose
   .then(() =>
     logger.info('connected to MongoDB'))
   .catch(error =>
-    logger.error('Failed to connect to database',)
+    logger.error('Failed to connect to database', error)
   )
 
 //app.use(middleware.requestLogger)

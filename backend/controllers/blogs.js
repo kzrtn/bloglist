@@ -25,7 +25,7 @@ blogsRouter.get('/:id', async (req, res) => {
 blogsRouter.post('/', userExtractor, async (req, res) => {
   if (req.body?.likes === undefined)
     req.body.likes = 0
-  
+
   if (req.body?.title === undefined || req.body?.url === undefined) {
     res.status(400).end()
   }
@@ -56,10 +56,10 @@ blogsRouter.delete('/:id', userExtractor, async (req, res) => {
     if (user.id !== blogToDelete.user.toString()) {
       res.status(401).json({ error: 'user id that sent delete request is not owner of blog' })
     }
-    const result = await Blog.findByIdAndDelete(req.params.id)
+    await Blog.findByIdAndDelete(req.params.id)
     res.status(204).end() // successful delete
-
   } catch (err) {
+    console.error('error in the delete route', err)
     res.status(400).end() // blog id is malformatted
   }
 })
@@ -83,8 +83,8 @@ blogsRouter.put('/:id', userExtractor, async (req, res) => {
     }
     const result = await Blog.findByIdAndUpdate(blogId, updatedObj)
     res.status(200).json(result) // successful put
-
   } catch (err) {
+    console.error('error in the put route', err)
     res.status(400).end() // blog id is malformatted
   }
 })

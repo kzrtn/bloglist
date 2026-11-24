@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt')
-const logger = require('../utils/logger.js')
 const User = require('../models/user.js')
 
 const userRouter = require('express').Router()
@@ -7,7 +6,7 @@ const userRouter = require('express').Router()
 userRouter.get('/', async (req, res) => {
   const results = await User
     .find({})
-    .populate('blogs', { title: true, url: true, author: true, likes: true})
+    .populate('blogs', { title: true, url: true, author: true, likes: true })
 
   res
     .status(200)

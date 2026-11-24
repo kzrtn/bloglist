@@ -1,7 +1,3 @@
-const dummy = blogs => {
-  return 1
-}
-
 const totalLikes = blogPosts => {
   return blogPosts.reduce((sum, post) => sum + post.likes, 0)
 }
@@ -81,7 +77,7 @@ const mostLikes = blogPosts => {
 //
 // Returns the winning author's aggregated object: { author, [attribute]: total }
 // Returns {} if blogPosts is empty.
-const FindMostOf = (blogPosts, attribute, countMode) => { 
+const FindMostOf = (blogPosts, attribute, countMode) => {
   let blogAuthors = []
 
   blogPosts.forEach(blogPost => {
@@ -107,4 +103,4 @@ const FindMostOf = (blogPosts, attribute, countMode) => {
   return winnerBlog
 }
 
-module.exports = { dummy, totalLikes, favoriteBlog, FindMostOf }
+module.exports = { totalLikes, favoriteBlog, FindMostOf, mostBlogs, mostLikes }

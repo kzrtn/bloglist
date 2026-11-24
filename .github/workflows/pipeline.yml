@@ -35,7 +35,7 @@ jobs:
         path: playwright-report/
         retention-days: 30
 
-  vitest_tests_and_deploy:
+  backend_tests_and_deploy:
     needs: [playwright_tests]
     runs-on: ubuntu-latest
     env:
@@ -50,17 +50,15 @@ jobs:
         node-version: '24'
     - name: Install backend dependencies
       run: cd backend && npm install
-##    - name: Check style
-##      run: npm run eslint
-##    - name: Build
-##      run: npm run build
+    - name: Check style
+      run: npm run lint
     - name: Run vitest tests
       run: cd backend && npm run test
-##    - name: Trigger deployment
-##      if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
-##      run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}"
+    - name: Trigger deployment
+      if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
+      run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}"
 ##  discord_status:
-##    needs: vitest_tests_and_deploy
+##    needs: backend_tests_and_deploy
 ##    if: always()
 ##    runs-on: ubuntu-latest
 ##    environment: DISCORD
@@ -70,16 +68,16 @@ jobs:
 ##        with:
 ##          webhook: ${{ secrets.DISCORD_WEBHOOK }}
 ##          status: ${{ (contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped')) && 'failure' || contains(needs.*.result, 'cancelled') && 'cancelled' || 'success' }}
-##  tag_release:
-##    needs: vitest_test_and_deploy
-##    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
-##    runs-on: ubuntu-latest
-##    permissions:
-##      contents: write
-##    steps:
-##    - uses: actions/checkout@v6
-##    - name: Bump version and push tag
-##      uses: anothrNick/github-tag-action@1.75.0
-##      env:
-##        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-##        DEFAULT_BUMP: patch
+  tag_release:
+    needs: backend_tests_and_deploy
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v6
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.75.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch

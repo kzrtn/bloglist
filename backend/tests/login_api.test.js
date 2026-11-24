@@ -1,9 +1,6 @@
-const assert = require('node:assert')
 const { describe, test, beforeEach, after } = require('node:test')
 
 const { createSampleBlogs } = require('./test_helper.js')
-const Blog = require('../models/blog.js')
-const User = require('../models/user.js')
 const app = require('../app.js')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
@@ -21,7 +18,7 @@ describe('user logging in with', () => {
       password: 'admin@12333',
     }
 
-    const res = await api
+    await api
       .post('/api/login')
       .send(testUser)
       .expect(200)
@@ -33,7 +30,7 @@ describe('user logging in with', () => {
       password: 'admin@12',
     }
 
-    const res = await api
+    await api
       .post('/api/login')
       .send(testUser)
       .expect(401)

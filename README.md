@@ -9,4 +9,5 @@ Live deployment here: https://bloglist-z4k9.onrender.com
 Start by running `npm install` inside the project folder
 
 `npm start` to run both backend and frontend
+
 `npm test` to run tests

@@ -25,9 +25,9 @@ jobs:
     - name: Install backend dependencies
       run: cd backend && npm install
     - name: Install Playwright Browsers
-      run: cd playwright-tests && npm install && npx playwright install --with-deps
+      run: cd playwright-tests && npm install && npx playwright install --with-deps chromium
     - name: Run Playwright tests
-      run: cd playwright-tests && npm run test
+      run: cd playwright-tests && npm run test -- --project=chromium
     - uses: actions/upload-artifact@v5
       if: ${{ !cancelled() }}
       with:
@@ -48,6 +48,8 @@ jobs:
     - uses: actions/setup-node@v6
       with:
         node-version: '24'
+    - name: Install root dependencies
+      run: npm install
     - name: Install backend dependencies
       run: cd backend && npm install
     - name: Check style

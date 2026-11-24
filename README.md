@@ -3,6 +3,7 @@
 This repository is used for release of part 4 and 5 of the Full Stack Open course. It is meant for submission in part 11.
 
 Live deployment here: https://bloglist-z4k9.onrender.com
+The repo for exercise 22: https://github.com/kzrtn/bloglist
 
 ## Commands
 
